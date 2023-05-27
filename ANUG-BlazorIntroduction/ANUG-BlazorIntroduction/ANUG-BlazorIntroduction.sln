@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANUG-BlazorIntroduction", "ANUG-BlazorIntroduction.csproj", "{C188B555-E283-4168-B2E5-222424CBE64F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9} = {7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "..\SharedModels\SharedModels.csproj", "{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{C188B555-E283-4168-B2E5-222424CBE64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C188B555-E283-4168-B2E5-222424CBE64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C188B555-E283-4168-B2E5-222424CBE64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5592F8-0B83-4B82-9C7A-2A87AFDE3DC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

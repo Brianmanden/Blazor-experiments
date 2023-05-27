@@ -1,3 +1,6 @@
+global using Shared.Model;
+global using Shared.Service;
+
 using ANUG_BlazorIntroduction;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
