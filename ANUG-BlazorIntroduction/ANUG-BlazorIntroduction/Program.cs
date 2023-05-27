@@ -1,5 +1,5 @@
-global using Shared.Model;
-global using Shared.Service;
+global using SharedModels.Model;
+global using SharedModels.Service;
 
 using ANUG_BlazorIntroduction;
 using Microsoft.AspNetCore.Components.Web;
@@ -10,5 +10,6 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddScoped<IBookmarkService, BookmarkService>();
 
 await builder.Build().RunAsync();

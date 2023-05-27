@@ -1,0 +1,74 @@
+﻿@using SharedModels.Service
+@using SharedModels.Model
+@inject IBookmarkService BookmarkService;
+@inject NavigationManager NavigationManager;
+@page "/AddEditBookmark"
+@page "/AddEditBookmark/{BookmarkGuid}"
+
+<PageTitle>@_pageTitle</PageTitle>
+<h3>Add Edit Bookmark</h3>
+
+<EditForm Model="_bookmark" OnSubmit="FormSubmitted">
+    <DataAnnotationsValidator />
+
+    <label for="Title">Title</label>
+    <input @bind="_bookmark.Title" id="Title" />
+    <ValidationMessage For="() => _bookmark.Title" />
+    <br />
+
+    <label for="Url">Url</label>
+    <input @bind="_bookmark.Url" id="Url" />
+    <ValidationMessage For="() => _bookmark.Url" />
+    <br />
+
+    <label for="Title">Description</label>
+    <input @bind="_bookmark.Description" id="Description" />
+    <ValidationMessage For="() => _bookmark.Description" />
+    <br />
+
+    <input type="submit" value="@_submitButtonCaption" />
+</EditForm>
+
+@code{
+    private Bookmark _bookmark;
+
+    private bool _isAddMode;
+    private string _submitButtonCaption;
+    private string _pageTitle;
+
+    [Parameter]
+    public string BookmarkGuid { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _bookmark = new();
+        _isAddMode = string.IsNullOrWhiteSpace(BookmarkGuid);
+        if (_isAddMode)
+        {
+            _submitButtonCaption = "Add";
+            _pageTitle = "Add Bookmark";
+        }else
+        {
+            _bookmark = await BookmarkService.GetBookmark(BookmarkGuid);
+            _submitButtonCaption = "Update";
+            _pageTitle = $"Update Bookmark '{_bookmark.Title}'";
+        }
+    }
+
+    private async Task FormSubmitted(EditContext editContext)
+    {
+        bool formIsValid = editContext.Validate();
+        if (formIsValid)
+        {
+            if (_isAddMode)
+            {
+                _bookmark.Guid = Guid.NewGuid().ToString();
+                BookmarkService.AddBookmark(_bookmark);
+            }else
+            {
+                BookmarkService.UpdateBookmark(_bookmark);
+            }
+            NavigationManager.NavigateTo("bookmarks");
+        }
+    }
+}
