@@ -16,9 +16,13 @@
     <MudDrawer @bind-Open="@_drawerOpen">
         <MyNavMenu />
     </MudDrawer>
+
     <MudMainContent>
-        @Body
+        <MudContainer MaxWidth="MaxWidth.Large">
+            @Body
+        </MudContainer>
     </MudMainContent>
+
 </MudLayout>
 
 @code{
