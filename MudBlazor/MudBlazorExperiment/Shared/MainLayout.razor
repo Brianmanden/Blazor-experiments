@@ -5,31 +5,81 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar>
-        <MudIconButton
-            Icon="@Icons.Material.Filled.Menu"
-            Color="Color.Inherit"
-            Edge="Edge.Start"
-            OnClick="@((e) => DrawerToggle())" />
-        My MudBlazor Application
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
-        <MyNavMenu />
-    </MudDrawer>
-
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Large">
-            @Body
+            <MudAppBar Color="Color.Primary" Fixed="false">
+                <MudIcon Icon="@Icons.Material.Filled.ChevronLeft" Title="Prev. Week" />
+                <MudSpacer />
+                <MudText Typo="Typo.h6">Week # 26</MudText>
+                <MudSpacer />
+                <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Title="Prev. Week" />
+            </MudAppBar>
+            <MudTabs Elevation="4" Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info" Class="mt-4">
+                <MudTabPanel Text="Monday" />
+                <MudTabPanel Text="Tuesday" />
+                <MudTabPanel Text="Wedneysday" />
+                <MudTabPanel Text="Thursday" />
+                <MudTabPanel Text="Friday" />
+                <MudTabPanel Text="Saturday" />
+                <MudTabPanel Text="Sunday" />
+            </MudTabs>
+            <MudForm>
+                <MudSelect T="string" Label="Tasks" MultiSelection="true">
+                    <MudSelectItem T="string">Slæbe gips</MudSelectItem>
+                    <MudSelectItem T="string">Skære gips</MudSelectItem>
+                    <MudSelectItem T="string">Sætte gips op</MudSelectItem>
+                </MudSelect>
+                <MudItem>
+                    <MudTimePicker Label="Starting Time" PickerVariant="PickerVariant.Dialog" />
+                </MudItem>
+                <MudItem>
+                    <MudTimePicker PickerVariant="PickerVariant.Dialog" Label="Ending Time" OpenTo="OpenTo.Hours" @bind-Time="theTime" />
+                    @*<MudTimePicker PickerVariant="PickerVariant.Dialog" Label="24 hours" @bind-Time="time" />*@
+                </MudItem>
+                <MudSpacer />
+                
+                <br />
+                <MudDivider />
+                <br />
+
+                <MudText Typo="Typo.h6">List of tasks</MudText>
+
+                <br />
+                
+                <MudGrid Spacing="2">
+                    <MudItem>
+                        <MudIconButton Icon="@Icons.Material.Filled.Cancel" aria-label="cancel"></MudIconButton>
+                    </MudItem>
+                    <MudItem>
+                        <MudField Label="Search" Variant="Variant.Outlined">
+                            <input type="text" />
+                        </MudField>
+                    </MudItem>
+                    <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
+@*
+                    <MudItem>
+                        <MudIconButton Icon="@Icons.Material.Filled.Search" aria-label="search"></MudIconButton>
+                    </MudItem>*@
+                </MudGrid>
+
+                <MudDivider />
+                <MudSpacer />
+                <MudDivider />
+            </MudForm>
         </MudContainer>
     </MudMainContent>
 
 </MudLayout>
 
-@code{
-    bool _drawerOpen = true;
+@code {
+    //bool _drawerOpen = true;
 
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
+    //void DrawerToggle()
+    //{
+    //    _drawerOpen = !_drawerOpen;
+    //}
+
+    TimeSpan? theTime = new TimeSpan(02, 35, 00);
+
+    public string Search { get; set; }
 }
