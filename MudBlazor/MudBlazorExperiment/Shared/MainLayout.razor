@@ -29,13 +29,50 @@
                     <MudSelectItem T="string">Skære gips</MudSelectItem>
                     <MudSelectItem T="string">Sætte gips op</MudSelectItem>
                 </MudSelect>
+
+                @* STARTING TIME *@
                 <MudItem>
-                    <MudTimePicker Label="Starting Time" PickerVariant="PickerVariant.Dialog" />
+                    <MudTimePicker
+                        Adornment="Adornment.Start"
+                        Label="Starting Time"
+                        PickerVariant="PickerVariant.Dialog"
+                        TimeEditMode="TimeEditMode.OnlyHours"
+                        @bind-Time="startingTime">
+                        <PickerActions>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.startTime, 0)">:00</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.startTime, 15)">:15</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.startTime, 30)">:30</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.startTime, 45)">:45</MudButton>
+                            <MudButton Color="Color.Primary" OnClick="@(() => context.Close())">Ok</MudButton>
+                        </PickerActions>
+                    </MudTimePicker>
+
+                    <MudText>@startingTime</MudText>
                 </MudItem>
+                @* /STARTING TIME *@
+
+                @* ENDING TIME *@
                 <MudItem>
-                    <MudTimePicker PickerVariant="PickerVariant.Dialog" Label="Ending Time" OpenTo="OpenTo.Hours" @bind-Time="theTime" />
-                    @*<MudTimePicker PickerVariant="PickerVariant.Dialog" Label="24 hours" @bind-Time="time" />*@
+                    <MudTimePicker
+                        Adornment="Adornment.Start"
+                        Label="Ending Time"
+                        PickerVariant="PickerVariant.Dialog"
+                        TimeEditMode="TimeEditMode.OnlyHours"
+                        @bind-Time="endingTime">
+                        <PickerActions>
+                            <MudButton Class="mud-theme-primary" @onch @onclick="() => setPredefinedMinutes(Times.endingTime, 0)">:00</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 15)">:15</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 30)">:30</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 45)">:45</MudButton>
+                            <MudButton Color="Color.Primary" OnClick="@(() => context.Close())">Ok</MudButton>
+                        </PickerActions>
+                    </MudTimePicker>
+
+                    <MudText>@endingTime</MudText>
+
                 </MudItem>
+                @* /ENDING TIME *@
+
                 <MudSpacer />
                 
                 <br />
@@ -46,21 +83,7 @@
 
                 <br />
                 
-                <MudGrid Spacing="2">
-                    <MudItem>
-                        <MudIconButton Icon="@Icons.Material.Filled.Cancel" aria-label="cancel"></MudIconButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudField Label="Search" Variant="Variant.Outlined">
-                            <input type="text" />
-                        </MudField>
-                    </MudItem>
-                    <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
-@*
-                    <MudItem>
-                        <MudIconButton Icon="@Icons.Material.Filled.Search" aria-label="search"></MudIconButton>
-                    </MudItem>*@
-                </MudGrid>
+                <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
 
                 <MudDivider />
                 <MudSpacer />
@@ -72,14 +95,27 @@
 </MudLayout>
 
 @code {
-    //bool _drawerOpen = true;
+    public enum Times
+    {
+        startTime,
+        endingTime
+    }
 
-    //void DrawerToggle()
-    //{
-    //    _drawerOpen = !_drawerOpen;
-    //}
-
-    TimeSpan? theTime = new TimeSpan(02, 35, 00);
+    TimeSpan? startingTime = new TimeSpan(02, 35, 00);
+    TimeSpan? endingTime = new TimeSpan(02, 35, 00);
 
     public string Search { get; set; }
+
+    public void setPredefinedMinutes(Times whichTime, int minutes)
+    {
+        if (whichTime == Times.endingTime)
+        {
+            endingTime = TimeSpan.Parse(endingTime!.Value.Hours + ":" + minutes + ":00");
+        }
+        else
+        {
+            startingTime = TimeSpan.Parse(startingTime!.Value.Hours + ":" + minutes + ":00");
+        }
+        Console.WriteLine(endingTime);
+    }
 }
