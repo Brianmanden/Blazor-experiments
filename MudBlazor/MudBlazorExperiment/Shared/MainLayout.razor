@@ -4,17 +4,25 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 <style>
+    .mud-main-content{
+        padding-top: 15px;
+    }
+
+    .mud-container{
+        padding-top: 15px;
+    }
+
     .mud-paper{
         padding: 15px;
     }
 
-    .mud-typography-h4{
+    .company-headline {
         background: var(--mud-palette-primary-lighten);
         border-radius: 4px;
+        box-shadow: var(--mud-elevation-5);
         color: var(--mud-palette-white);
-        
-        margin: 10px 0 15px;
         letter-spacing: 3px;
+        margin: 10px 0 30px;
         padding: 10px;
         text-align: center;
     }
@@ -22,13 +30,17 @@
     .mud-typography-h6{
         margin: 10px 0 15px;
     }
+
+    .submit-btn{
+        box-shadow: var(--mud-elevation-5);
+    }
 </style>
 
 <MudLayout>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Large">
 
-            <MudText Typo="Typo.h4">Juul Timesedler</MudText>
+            <MudText Class="company-headline" Typo="Typo.h4">Juul Timesedler</MudText>
 
             <MudPaper Elevation="5">
                 <MudText Typo="Typo.h6">Weeks &amp; days</MudText>
@@ -46,13 +58,13 @@
                     Class="mt-4"
                     Color="@Color.Info"
                     Rounded="true">
-                    <MudTabPanel Text="Mon" />
-                    <MudTabPanel Text="Tue" />
-                    <MudTabPanel Text="Wed" />
-                    <MudTabPanel Text="Thu" />
-                    <MudTabPanel Text="Fri" />
-                    <MudTabPanel Text="Sat" />
-                    <MudTabPanel Text="Sun" />
+                    <MudTabPanel Text="Monday" />
+                    <MudTabPanel Text="Tuesday" />
+                    <MudTabPanel Text="Wednesday" />
+                    <MudTabPanel Text="Thursday" />
+                    <MudTabPanel Text="Friday" />
+                    <MudTabPanel Text="Saturday" />
+                    <MudTabPanel Text="Sunday" />
                 </MudTabs>
 
             </MudPaper>
@@ -82,7 +94,6 @@
                             </PickerActions>
                         </MudTimePicker>
 
-                        <MudText>@startingTime</MudText>
                     </MudItem>
                     @* /STARTING TIME *@
 
@@ -104,8 +115,6 @@
                                 <MudButton Color="Color.Primary" OnClick="@(() => context.Close())">Ok</MudButton>
                             </PickerActions>
                         </MudTimePicker>
-
-                        <MudText>@endingTime</MudText>
 
                     </MudItem>
                     @* /ENDING TIME *@
@@ -133,6 +142,7 @@
                 <br />
 
                 <MudButton
+                    Class="submit-btn"
                     Color="Color.Primary"
                     Variant="Variant.Filled"
                 >Send</MudButton>
