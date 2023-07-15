@@ -7,28 +7,64 @@
 <MudLayout>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Large">
-            <MudAppBar Color="Color.Primary" Fixed="false">
-                <MudIcon Icon="@Icons.Material.Filled.ChevronLeft" Title="Prev. Week" />
-                <MudSpacer />
-                <MudText Typo="Typo.h6">Week # 26</MudText>
-                <MudSpacer />
-                <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Title="Prev. Week" />
-            </MudAppBar>
-            <MudTabs Elevation="4" Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info" Class="mt-4">
-                <MudTabPanel Text="Monday" />
-                <MudTabPanel Text="Tuesday" />
-                <MudTabPanel Text="Wedneysday" />
-                <MudTabPanel Text="Thursday" />
-                <MudTabPanel Text="Friday" />
-                <MudTabPanel Text="Saturday" />
-                <MudTabPanel Text="Sunday" />
-            </MudTabs>
+            <MudPaper Elevation="5">
+
+                <MudAppBar Color="Color.Primary" Fixed="false">
+                    <MudSpacer />
+                    <MudIcon Icon="@Icons.Material.Filled.ChevronLeft" Title="Prev. Week" />
+                    <MudSpacer />
+                    <MudText Typo="Typo.h6">Week # 26</MudText>
+                    <MudSpacer />
+                    <MudIcon Icon="@Icons.Material.Filled.ChevronRight" Title="Prev. Week" />
+                    <MudSpacer />
+                    <MudDivider />
+                </MudAppBar>
+                <MudTabs Elevation="4" Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info" Class="mt-4">
+                    <MudTabPanel Text="Monday" />
+                    <MudTabPanel Text="Tuesday" />
+                    <MudTabPanel Text="Wedneysday" />
+                    <MudTabPanel Text="Thursday" />
+                    <MudTabPanel Text="Friday" />
+                    <MudTabPanel Text="Saturday" />
+                    <MudTabPanel Text="Sunday" />
+                </MudTabs>
+
+            </MudPaper>
+            <br/>
+            <br />
+
+            <MudPaper Elevation="5">
+                <MudList>
+                    <MudListSubheader>
+                        <MudTextField @bind-Value="@searchTerm" AdornmentIcon="@Icons.Material.Filled.Brush"
+                                    Adornment="Adornment.End" Immediate="true" Variant="Variant.Outlined" />
+                    </MudListSubheader>
+
+                    @foreach (var sentence in sentences)
+                    {
+                        <MudListItem @key="sentence" Icon="@Icons.Material.Filled.Folder">
+                            <MudHighlighter
+                                Class="mud-primary-text"
+                                Style="background-color:transparent;font-weight:bold"
+                                Text="@sentence"
+                                HighlightedText="@searchTerm" />
+                        </MudListItem>
+                    }
+                </MudList>
+            </MudPaper>
+
             <MudForm>
+
+                <br />
+
+                
                 <MudSelect T="string" Label="Tasks" MultiSelection="true">
                     <MudSelectItem T="string">Slæbe gips</MudSelectItem>
                     <MudSelectItem T="string">Skære gips</MudSelectItem>
                     <MudSelectItem T="string">Sætte gips op</MudSelectItem>
                 </MudSelect>
+
+                <br />
 
                 @* STARTING TIME *@
                 <MudItem>
@@ -81,15 +117,15 @@
 
                 <MudText Typo="Typo.h6">List of tasks</MudText>
 
-                <br />
-                
                 <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
 
-                <MudDivider />
-                <MudSpacer />
-                <MudDivider />
+                <br />
 
                 <MudTextField T="string" Label="Comments" Variant="Variant.Outlined" Text="200.- for diesel" Lines="5"></MudTextField>
+
+                <br />
+                
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">Send</MudButton>
             </MudForm>
         </MudContainer>
     </MudMainContent>
@@ -97,6 +133,12 @@
 </MudLayout>
 
 @code {
+    string searchTerm = "it";
+    IEnumerable<string> sentences = new List<string>
+    {
+        "This is the first item", "This is the second item", "This is the third item"
+    };
+
     public enum Times
     {
         startTime,
