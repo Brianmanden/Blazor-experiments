@@ -60,7 +60,7 @@
                         TimeEditMode="TimeEditMode.OnlyHours"
                         @bind-Time="endingTime">
                         <PickerActions>
-                            <MudButton Class="mud-theme-primary" @onch @onclick="() => setPredefinedMinutes(Times.endingTime, 0)">:00</MudButton>
+                            <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 0)">:00</MudButton>
                             <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 15)">:15</MudButton>
                             <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 30)">:30</MudButton>
                             <MudButton Class="mud-theme-primary" @onclick="() => setPredefinedMinutes(Times.endingTime, 45)">:45</MudButton>
@@ -88,6 +88,8 @@
                 <MudDivider />
                 <MudSpacer />
                 <MudDivider />
+
+                <MudTextField T="string" Label="Comments" Variant="Variant.Outlined" Text="200.- for diesel" Lines="5"></MudTextField>
             </MudForm>
         </MudContainer>
     </MudMainContent>
